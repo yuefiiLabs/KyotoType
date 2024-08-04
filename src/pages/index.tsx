@@ -1,5 +1,6 @@
 import { ChangeEvent, useEffect, useState } from "react";
 import { motion } from 'framer-motion';
+import Head from "next/head";
 
 export default function Home() {
   const sampleTexts = [
@@ -97,44 +98,62 @@ export default function Home() {
   };
 
   return (
-    <div className="p-6 mt-10 border rounded-md max-w-3xl mx-auto">
-      <h1 className="text-4xl font-bold mb-4 text-center">Typing Test</h1>
-      {!showText ? (
-        <div className="flex justify-center">
-          <button
-            onClick={handleStart}
-            className="px-4 py-2 bg-teal-500 text-white rounded hover:bg-teal-600 transition"
-          >
-            Mulai Sekarang
-          </button>
-        </div>
-      ) : (
-        <>
-          <div className="mb-4 whitespace-pre-wrap text-xl border p-4 rounded bg-gray-100">
-            {getStyledSampleText()}
+    <>
+      <Head>
+        <title>KyotoType - Uji Kecepatan Mengetik Anda</title>
+        <meta name="description" content="Uji kecepatan mengetik Anda dengan tes typing interaktif. Bandingkan kecepatan mengetik Anda dan tingkatkan keterampilan mengetik Anda." />
+        <meta name="keywords" content="typing test, Kyoto, typing challenge, KyotoType" />
+        <meta name="author" content="Yuefii" />
+        <meta property="og:title" content="KyotoType - Uji Kecepatan Mengetik Anda" />
+        <meta property="og:description" content="Uji kecepatan mengetik Anda dengan tes typing interaktif. Bandingkan kecepatan mengetik Anda dan tingkatkan keterampilan mengetik Anda." />
+        <meta property="og:image" content="https://example.com/og-image.jpg" />
+        <meta property="og:url" content="https://example.com" />
+        <meta property="og:type" content="website" />
+        <meta property="twitter:card" content="summary_large_image" />
+        <meta property="twitter:title" content="KyotoType - Uji Kecepatan Mengetik Anda" />
+        <meta property="twitter:description" content="Uji kecepatan mengetik Anda dengan tes typing interaktif. Bandingkan kecepatan mengetik Anda dan tingkatkan keterampilan mengetik Anda." />
+        {/* <meta property="twitter:image" content="https://example.com/twitter-image.jpg" /> */}
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
+      <div className="p-6 mt-10 border rounded-md max-w-3xl mx-auto">
+        <h1 className="text-4xl font-bold mb-4 text-center">Typing Test</h1>
+        {!showText ? (
+          <div className="flex justify-center">
+            <button
+              onClick={handleStart}
+              className="px-4 py-2 bg-teal-500 text-white rounded hover:bg-teal-600 transition"
+            >
+              Mulai Sekarang
+            </button>
           </div>
-          <textarea
-            value={text}
-            onChange={handleChange}
-            placeholder="Mulai mengetik di sini..."
-            disabled={isFinished}
-            className="w-full h-40 p-2 border border-gray-300 rounded resize-none"
-          />
-          {isFinished && (
-            <div className="mt-4 text-center">
-              <h2 className="text-xl font-semibold mb-2">Hasil Tes</h2>
-              <p className="text-lg">Kecepatan Mengetik: {calculateWPM()} WPM</p>
-              <p className="text-lg">Waktu: {time} detik</p>
-              <button
-                onClick={handleRestart}
-                className="mt-4 px-4 py-2 bg-teal-600 text-white rounded hover:bg-teal-700 transition-all"
-              >
-                Mulai Lagi
-              </button>
+        ) : (
+          <>
+            <div className="mb-4 whitespace-pre-wrap text-xl border p-4 rounded bg-gray-100">
+              {getStyledSampleText()}
             </div>
-          )}
-        </>
-      )}
-    </div>
+            <textarea
+              value={text}
+              onChange={handleChange}
+              placeholder="Mulai mengetik di sini..."
+              disabled={isFinished}
+              className="w-full h-40 p-2 border border-gray-300 rounded resize-none"
+            />
+            {isFinished && (
+              <div className="mt-4 text-center">
+                <h2 className="text-xl font-semibold mb-2">Hasil Tes</h2>
+                <p className="text-lg">Kecepatan Mengetik: {calculateWPM()} WPM</p>
+                <p className="text-lg">Waktu: {time} detik</p>
+                <button
+                  onClick={handleRestart}
+                  className="mt-4 px-4 py-2 bg-teal-600 text-white rounded hover:bg-teal-700 transition-all"
+                >
+                  Mulai Lagi
+                </button>
+              </div>
+            )}
+          </>
+        )}
+      </div>
+    </>
   );
 };
